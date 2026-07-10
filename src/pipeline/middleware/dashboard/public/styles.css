@@ -1,0 +1,142 @@
+:root {
+  --bg-0: #06151b;
+  --bg-1: #0c2730;
+  --surface: rgba(16, 42, 50, 0.88);
+  --surface-alt: rgba(20, 57, 66, 0.9);
+  --accent: #ffd166;
+  --accent-2: #43d9ad;
+  --text: #f4fff9;
+  --muted: #98b8c2;
+  --danger: #ff7b72;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(67, 217, 173, 0.18), transparent 35%),
+    radial-gradient(circle at 80% 10%, rgba(255, 209, 102, 0.15), transparent 32%),
+    linear-gradient(130deg, var(--bg-0), var(--bg-1));
+}
+
+.layout {
+  width: min(1120px, 92vw);
+  margin: 32px auto 48px;
+}
+
+.hero {
+  background: linear-gradient(120deg, rgba(15, 51, 61, 0.88), rgba(14, 36, 44, 0.94));
+  border: 1px solid rgba(152, 184, 194, 0.2);
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
+}
+
+.hero h1 {
+  margin: 0 0 10px;
+  font-size: clamp(1.5rem, 2vw + 1rem, 2.4rem);
+  letter-spacing: 0.02em;
+}
+
+.hero p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.panel {
+  margin-top: 18px;
+  background: var(--surface);
+  border: 1px solid rgba(152, 184, 194, 0.2);
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.panel h2 {
+  margin: 0 0 14px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--muted);
+}
+
+input {
+  width: 100%;
+  border: 1px solid rgba(152, 184, 194, 0.35);
+  border-radius: 8px;
+  background: rgba(8, 28, 34, 0.95);
+  color: var(--text);
+  padding: 11px 12px;
+}
+
+button {
+  margin-top: 12px;
+  background: linear-gradient(90deg, var(--accent), #ffb703);
+  border: 0;
+  color: #2a1800;
+  font-weight: 700;
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+}
+
+.message {
+  margin: 12px 0 0;
+  color: var(--accent-2);
+}
+
+.message.error {
+  color: var(--danger);
+}
+
+.grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.card {
+  background: var(--surface-alt);
+  border: 1px solid rgba(152, 184, 194, 0.2);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.card h3 {
+  margin: 0 0 12px;
+}
+
+.card p {
+  margin: 8px 0;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.card strong {
+  color: var(--text);
+  font-weight: 600;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+#sensor-list {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  color: var(--text);
+}
+
+@media (max-width: 960px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

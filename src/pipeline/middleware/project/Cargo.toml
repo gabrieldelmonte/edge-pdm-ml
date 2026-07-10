@@ -1,0 +1,20 @@
+[package]
+name = "middleware"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+axum = { version = "0.8.9", features = ["json"] }
+tokio = { version = "1.52.1", features = ["full"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"] }
+rumqttc = { version = "0.24", features = ["use-rustls"] }
+dashmap = "5"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["json", "env-filter"] }
+tower = "0.5"
+tower-http = { version = "0.6", features = ["cors", "trace"] }
+
+[profile.release]
+opt-level = 3

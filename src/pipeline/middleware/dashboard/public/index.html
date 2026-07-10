@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edge PdM Middleware Dashboard</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <main class="layout">
+    <section class="hero">
+      <h1>Edge PdM Pipeline Control</h1>
+      <p>Monitor HTTP and MQTT ingest traffic, connected ESP sensors, and inference pipeline health.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Inference Endpoint</h2>
+      <form id="config-form">
+        <label for="inference_url">MW_INFERENCE_URL</label>
+        <input id="inference_url" name="inference_url" type="text" placeholder="https://host:8443/inference" required />
+        <button type="submit">Apply</button>
+      </form>
+      <p id="config-message" class="message"></p>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h3>HTTP Ingest API</h3>
+        <p><span>Bind host:</span> <strong id="http-bind-host">-</strong></p>
+        <p><span>Port:</span> <strong id="http-port">-</strong></p>
+      </article>
+
+      <article class="card">
+        <h3>MQTT Ingest</h3>
+        <p><span>Messages received:</span> <strong id="mqtt-received">0</strong></p>
+        <p><span>Forwarded to inference:</span> <strong id="mqtt-forwarded">0</strong></p>
+      </article>
+
+      <article class="card">
+        <h3>Runtime Counters</h3>
+        <p><span>Received uploads:</span> <strong id="received-uploads">0</strong></p>
+        <p><span>Completed files:</span> <strong id="completed-files">0</strong></p>
+        <p><span>Inference OK:</span> <strong id="inference-ok">0</strong></p>
+        <p><span>Inference errors:</span> <strong id="inference-error">0</strong></p>
+      </article>
+
+      <article class="card">
+        <h3>ESP Sensors</h3>
+        <p><span>Connected count:</span> <strong id="sensor-count">0</strong></p>
+        <p><span>Last device:</span> <strong id="last-sensor-id">-</strong></p>
+        <p><span>Last file id:</span> <strong id="last-file-id">-</strong></p>
+        <p><span>Last current (mA):</span> <strong id="last-current-ma">-</strong></p>
+        <ul id="sensor-list"></ul>
+      </article>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

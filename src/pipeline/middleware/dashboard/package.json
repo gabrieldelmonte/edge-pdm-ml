@@ -1,0 +1,13 @@
+{
+  "name": "edge-pdm-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Dashboard container for middleware status and configuration",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "http-proxy-middleware": "^3.0.3"
+  }
+}

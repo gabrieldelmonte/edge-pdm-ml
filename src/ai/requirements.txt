@@ -1,0 +1,23 @@
+# Core scientific stack
+numpy>=2.4.2
+pandas>=3.0.1
+scipy>=1.17.1
+
+# Machine learning
+scikit-learn>=1.8
+xgboost>=3.2.0
+lightgbm>=4.6.0
+joblib>=1.5.3
+
+# Deep learning
+torch>=2.10.0
+
+# Statistical models
+statsmodels>=0.14.6
+
+# Visualisation
+matplotlib>=3.10.8
+seaborn>=0.13.2
+
+# Utilities
+tqdm>=4.67.3

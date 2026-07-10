@@ -1,0 +1,51 @@
+# Ignore virtual environment directories
+venv-edge-pdm-ml/
+.venv/
+venv/
+
+# Ignoring pycache
+__pycache__/
+*.pyc
+
+# Ignoring log files
+logs/
+
+# --- #
+
+# Ignoring datasets
+mafaulda/
+nasa_bearing/
+
+# Generated AI artifacts (produced locally by training/evaluation; not tracked)
+src/ai/saved_models/
+src/ai/evaluation/plots/
+src/ai/datasets/*.png
+
+# --- #
+
+# Rust build output
+target/
+
+# ESP-IDF build output and auto-downloaded component dependencies
+# (restored from idf_component.yml + dependencies.lock on next `idf.py build`)
+build/
+managed_components/
+sdkconfig.old
+
+# Node dependencies and frontend build output
+node_modules/
+dist/
+
+# Linter/type-checker caches
+.ruff_cache/
+.mypy_cache/
+.pytest_cache/
+
+# Editor/OS cruft
+.DS_Store
+.idea/
+.vscode/
+
+# Local environment overrides
+.env
+.env.*

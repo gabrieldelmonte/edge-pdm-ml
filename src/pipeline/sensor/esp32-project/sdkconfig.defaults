@@ -1,0 +1,20 @@
+CONFIG_IDF_TARGET="esp32s3"
+CONFIG_ESPTOOLPY_FLASHSIZE_4MB=y
+CONFIG_PARTITION_TABLE_CUSTOM=y
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions.csv"
+CONFIG_MBEDTLS_SHA256_C=y
+CONFIG_MQTT_TRANSPORT_WEBSOCKET=n
+
+# Pin app_main to CPU1 (APP_CPU) so the reader task on CPU0 (priority 10)
+# does not preempt the main task during and after acquisition.
+CONFIG_ESP_MAIN_TASK_AFFINITY_CPU1=y
+
+# Do not auto-subscribe IDLE tasks to the TWDT.  The reader task manages
+# its own subscription; removing IDLE0 via esp_task_wdt_delete() while its
+# idle hook is still active causes spurious "task not found" spam.
+CONFIG_ESP_TASK_WDT_CHECK_IDLE_TASK_CPU0=n
+CONFIG_ESP_TASK_WDT_CHECK_IDLE_TASK_CPU1=n
+
+# Increase main task stack for app_send two-pass HTTP path (prefix[512] +
+# url[256] + suffix[128] + psa_hash_operation_t + HTTP client internals)
+CONFIG_ESP_MAIN_TASK_STACK_SIZE=8192

@@ -1,0 +1,43 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_DB=edge_pdm
+      - POSTGRES_USER=edge
+      - POSTGRES_PASSWORD=edge
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U edge -d edge_pdm"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DATABASE_URL=postgresql+psycopg2://edge:edge@db:5432/edge_pdm
+      - APP_SECRET_KEY=change-me-in-production
+      - APP_DEFAULT_SENSOR_ID=mock-esp32-01
+      - APP_DEFAULT_SENSOR_BEARING=underhang
+      - APP_DEFAULT_SENSOR_MODEL=LightGBM
+      - MODEL_ROOT=/app/models
+      - FRONTEND_DIST=/app/frontend-dist
+      - PYTHONPATH=/app/ai-shared
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./app:/app/app
+      - ../../ai/models:/app/ai-shared/models:ro
+      - ../../ai/saved_models:/models-source:ro
+      - ../../ai:/app/ai-shared/ai:ro
+
+volumes:
+  db_data:

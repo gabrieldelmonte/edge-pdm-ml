@@ -1,0 +1,47 @@
+services:
+  mosquitto:
+    image: eclipse-mosquitto:2
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+    ports:
+      - "1883:1883"
+
+  middleware:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    volumes:
+      - ./project:/build/project
+    ports:
+      - "8080:8080"
+    environment:
+      - MW_DEBUG_LOGS=true
+      - MW_BIND_ADDR=0.0.0.0:8080
+      - MW_INFERENCE_URL=http://host.docker.internal:8001/inference
+      - MW_LIS3DH_SAMPLE_RATE_HZ=5376
+      - MW_ADXL345_SAMPLE_RATE_HZ=3200
+      - MW_MQTT_ENABLED=true
+      - MW_MQTT_BROKER_HOST=mosquitto
+      - MW_MQTT_BROKER_PORT=1883
+      - MW_MQTT_INPUT_TOPIC=pipeline/input
+      - MW_MQTT_RESULT_TOPIC=pipeline/result
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - mosquitto
+
+  dashboard:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+    volumes:
+      - ./dashboard:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - MIDDLEWARE_URL=http://middleware:8080
+    depends_on:
+      - middleware
